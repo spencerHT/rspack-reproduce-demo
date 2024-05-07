@@ -1,6 +1,7 @@
 import path from "path";
 import { fileURLToPath } from "url";
 import HtmlWebpackPlugin from "html-webpack-plugin";
+import { TestPlugin } from './testPlugin.mjs';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const isRunningWebpack = !!process.env.WEBPACK;
@@ -9,6 +10,7 @@ if (!isRunningRspack && !isRunningWebpack) {
   throw new Error("Unknown bundler");
 }
 
+const htmlPlugin = new HtmlWebpackPlugin();
 /**
  * @type {import('webpack').Configuration | import('@rspack/cli').Configuration}
  */
@@ -18,7 +20,7 @@ const config = {
   entry: {
     main: "./src/index",
   },
-  plugins: [new HtmlWebpackPlugin()],
+  plugins: [htmlPlugin, new TestPlugin()],
   output: {
     clean: true,
     path: isRunningWebpack
@@ -29,6 +31,7 @@ const config = {
   experiments: {
     css: true,
   },
+  
 };
 
 export default config;
