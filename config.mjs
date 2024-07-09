@@ -1,5 +1,7 @@
 import path from "path";
 import { fileURLToPath } from "url";
+import rspack from '@rspack/core';
+import webpack from 'webpack';
 import HtmlWebpackPlugin from "html-webpack-plugin";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
@@ -18,7 +20,11 @@ const config = {
   entry: {
     main: "./src/index",
   },
-  plugins: [new HtmlWebpackPlugin()],
+  plugins: [new HtmlWebpackPlugin(), isRunningRspack ? new rspack.DefinePlugin({
+    'typeof window': JSON.stringify('undefined'),
+  }) : new webpack.DefinePlugin({
+    'typeof window': JSON.stringify('undefined'),
+  })],
   output: {
     clean: true,
     path: isRunningWebpack

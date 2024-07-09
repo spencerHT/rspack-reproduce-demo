@@ -5,4 +5,5 @@ export function render() {
     el.classList.add('text')
     document.getElementsByTagName('body')[0].appendChild(el)
     el.innerHTML = 'hello, world'
+    console.log(typeof window === 'undefined', "typeof window === 'undefined'")
 }

@@ -6,4 +6,9 @@ export default defineConfig({
       root: "./rsbuild-dist",
     },
   },
+  source: {
+    define: {
+      'typeof window': JSON.stringify('undefined'),
+    }
+  }
 });
